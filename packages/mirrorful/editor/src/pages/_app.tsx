@@ -2,6 +2,9 @@ import '../main.css'
 import '../atom-one-dark.css'
 import '../blocks.css'
 
+import { I18nextProvider } from 'react-i18next';
+import i18n from '../i18n';
+
 import { Onboarding } from '@mirrorful/core/lib/components/Onboarding'
 import SplashScreen from '@mirrorful/core/lib/components/SplashScreen'
 import { MirrorfulThemeProvider } from '@mirrorful/core/lib/components/ThemeProvider'
@@ -18,7 +21,49 @@ import { LayoutWrapper } from 'src/components/LayoutWrapper'
 import { fetchStoreData } from '../utils/fetchStoreData'
 import { postStoreData } from '../utils/postStoreData'
 
-if (typeof window !== 'undefined') {
+// rest of the file...
+<<<< ORIGINAL
+return (
+  <MirrorfulThemeProvider>
+    {isLoading && <SplashScreen />}
+    {!shouldForceSkipOnboarding && showOnBoarding ? (
+      <Onboarding
+        postStoreData={postStoreData}
+        onFinishOnboarding={() => {
+          setShowOnBoarding(false)
+          setShouldForceSkipOnboarding(true)
+        }}
+        platform={'package'}
+      />
+    ) : (
+      <LayoutWrapper>
+        <Component {...pageProps} />
+      </LayoutWrapper>
+    )}
+  </MirrorfulThemeProvider>
+)
+====
+return (
+  <I18nextProvider i18n={i18n}>
+    <MirrorfulThemeProvider>
+      {isLoading && <SplashScreen />}
+      {!shouldForceSkipOnboarding && showOnBoarding ? (
+        <Onboarding
+          postStoreData={postStoreData}
+          onFinishOnboarding={() => {
+            setShowOnBoarding(false)
+            setShouldForceSkipOnboarding(true)
+          }}
+          platform={'package'}
+        />
+      ) : (
+        <LayoutWrapper>
+          <Component {...pageProps} />
+        </LayoutWrapper>
+      )}
+    </MirrorfulThemeProvider>
+  </I18nextProvider>
+)
   // This ensures that as long as we are client-side, posthog is always ready
   posthog.init('phc_Fi1SAV5Xhkmrf5VwIweTTmZDNnUIWmXkvXr7naLsNVV', {
     api_host: 'https://app.posthog.com',
